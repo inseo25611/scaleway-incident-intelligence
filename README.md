@@ -14,7 +14,7 @@ The goal is to turn publicly available operational data into an interactive deci
 - Source: Public Scaleway Status API
 - Sample: 50 recent incident records
 - Records with resolution timestamps: 42
-- Collection: October 2026
+- Incident creation date range: 6–30 October 2026
 
 The dataset is a limited snapshot, not the complete incident history.
 
@@ -57,6 +57,13 @@ streamlit run app.py
 Incident duration is calculated from creation to recorded resolution and must not be interpreted as actual service downtime.
 
 Service categories are derived from incident titles and standardised using heuristic rules. Incident types are classified using keywords, not verified root-cause analysis.
+
+Findings are exploratory and should not be interpreted as an assessment of Scaleway's overall service reliability.
+
+## Disclaimer
+
+This is an independent portfolio project and is not affiliated with or endorsed by Scaleway.
+
 
 Findings are exploratory and should not be interpreted as an assessment of Scaleway's overall service reliability.
 

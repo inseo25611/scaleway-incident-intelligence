@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 
 df = pd.read_csv("scaleway_analysed.csv")
 
-# 영향 수준을 원하는 순서로 정렬
+# Arrange impact levels in the desired order
 order = ["critical", "major", "minor", "none"]
 
 counts = df["impact"].value_counts()
@@ -14,7 +14,7 @@ fig, ax = plt.subplots(figsize=(9, 5))
 
 bars = ax.bar(counts.index, counts.values)
 
-# 막대 위에 실제 건수 표시
+# Display incident counts above the bars
 ax.bar_label(bars, padding=3)
 
 ax.set_title("Scaleway: Reported Incidents by Impact")
@@ -29,7 +29,7 @@ plt.show()
 print("Updated graph saved!")
 
 
-# 제품별 장애 건수 TOP 10
+# Top 10 incident categories by number of incidents
 df = pd.read_csv("scaleway_analysed.csv")
 
 product_counts = df["product"].value_counts().head(10)
@@ -47,10 +47,10 @@ ax.set_title("Scaleway: Top 10 Incident Categories")
 ax.set_xlabel("Number of Reported Incidents")
 ax.set_ylabel("Category")
 
-# 가장 많은 항목을 위쪽에 표시
+# Display the most frequent categories at the top
 ax.invert_yaxis()
 
-# 숫자가 오른쪽에서 잘리지 않도록 여유 확보
+# Add horizontal space to prevent value labels from being cut off
 ax.set_xlim(0, product_counts.max() * 1.2)
 
 plt.tight_layout()
@@ -61,13 +61,13 @@ plt.show()
 print("Product chart created successfully!")
 
 
-# 서비스별 기록상 해결시간 그래프
+# Chart of recorded incident duration by service
 summary = pd.read_csv("service_duration_summary.csv")
 
 if summary.empty:
     print("Not enough data to create this chart.")
 else:
-    # 중앙값이 가장 긴 서비스 TOP 10
+    # Top 10 services with the longest median recorded durations
     top10 = summary.nlargest(10, "median_hours")
 
     fig, ax = plt.subplots(figsize=(11, 6))
@@ -161,6 +161,11 @@ ax.set_xlabel("Number of Incidents")
 ax.set_xlim(0, counts.max() * 1.2)
 
 plt.tight_layout()
+
+plt.savefig("incidents_by_type.png", dpi=150)
+plt.show()
+
+print("Incident type chart created!")
 
 plt.savefig("incidents_by_type.png", dpi=150)
 plt.show()

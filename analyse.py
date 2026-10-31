@@ -1,18 +1,18 @@
 
 import pandas as pd
 
-# STEP 1: 저장한 CSV 파일 열기
+# STEP 1: Load the saved CSV file
 df = pd.read_csv("scaleway_incidents.csv")
 
-# STEP 2: 데이터가 몇 줄인지 확인
+# STEP 2: Check the number of records
 print("=== DATA OVERVIEW ===")
 print("Total incidents:", len(df))
 
-# STEP 3: 장애 영향 수준별 건수
+# STEP 3: Count incidents by impact level
 print("\n=== INCIDENTS BY IMPACT ===")
 print(df["impact"].value_counts())
 
-# STEP 4: 날짜를 Python이 계산할 수 있게 변환
+# STEP 4: Convert timestamps for calculations in Python
 df["created_at"] = pd.to_datetime(
     df["created_at"], utc=True
 )
@@ -21,12 +21,12 @@ df["resolved_at"] = pd.to_datetime(
     df["resolved_at"], utc=True
 )
 
-# STEP 5: 기록 생성부터 해결까지 걸린 시간 계산
+# STEP 5: Calculate duration from incident creation to resolution
 df["duration_hours"] = (
     df["resolved_at"] - df["created_at"]
 ).dt.total_seconds() / 3600
 
-# STEP 6: 해결된 장애만 선택
+# STEP 6: Select resolved incidents
 resolved = df[
     df["resolved_at"].notna()
     & (df["duration_hours"] >= 0)
@@ -45,11 +45,11 @@ if len(resolved) > 0:
         round(resolved["duration_hours"].max(), 2)
     )
 
-# STEP 7: 결과 저장
+# STEP 7: Save the results
 df.to_csv("scaleway_analysed.csv", index=False)
 
 
-# 가장 오래 걸린 장애 5건 확인
+# Identify the five incidents with the longest recorded durations
 print("\n=== TOP 5 LONGEST INCIDENTS ===")
 
 top5 = resolved.sort_values(
@@ -66,7 +66,7 @@ for _, row in top5.iterrows():
     print("Duration:", round(row["duration_hours"], 2), "hours")
 
 
-# 장애 제목에서 제품 이름 추출하기
+# Extract service names from incident titles
 import re
 
 def extract_product(name):
@@ -82,50 +82,50 @@ df["product"] = df["name"].apply(extract_product)
 print("\n=== INCIDENTS BY PRODUCT ===")
 print(df["product"].value_counts())
 
-# 제품 정보가 추가된 CSV 다시 저장
+# Save the CSV again with the added product classification
 df.to_csv("scaleway_analysed.csv", index=False)
 
 print("\nProduct classification completed!")
 
 
-# 서비스별 기록상 해결시간 분석
+# Analyse recorded incident duration by service
 print("\n=== DURATION BY SERVICE ===")
 
-# 분석된 CSV에서 제품 분류까지 포함된 데이터 불러오기
+# Load analysed data including product classifications
 service_df = pd.read_csv("scaleway_analysed.csv")
 
-# 해결시간이 있는 기록만 선택
+# Select records with available duration and product data
 service_df = service_df.dropna(
     subset=["duration_hours", "product"]
 )
 
-# 음수나 잘못된 해결시간 제외
+# Exclude negative or invalid durations
 service_df = service_df[
     service_df["duration_hours"] >= 0
 ]
 
-# 서비스별로 묶어서 계산
+# Aggregate duration metrics by service
 summary = service_df.groupby("product").agg(
     incidents=("id", "count"),
     median_hours=("duration_hours", "median"),
     max_hours=("duration_hours", "max")
 )
 
-# 기록이 최소 2건 있는 서비스만 선택
+# Include services with at least two incident records
 summary = summary[summary["incidents"] >= 2]
 
-# 중앙값이 긴 순서로 정렬
+# Sort by median recorded duration in descending order
 summary = summary.sort_values(
     "median_hours",
     ascending=False
 )
 
-# 소수점 둘째 자리까지 표시
+# Round results to two decimal places
 summary = summary.round(2)
 
 print(summary.to_string())
 
-# 결과를 CSV 파일로 저장
+# Export the results to a CSV file
 summary.to_csv("service_duration_summary.csv")
 
 print("\nService duration analysis completed!")
@@ -139,7 +139,7 @@ print("\nAnalysis completed!")
 
 print("\n=== DATA QUALITY CHECK ===")
 
-# 원본 CSV를 다시 불러오기
+# Reload the original CSV file
 quality_df = pd.read_csv("scaleway_incidents.csv")
 
 print("\n1. Total records:")
@@ -265,3 +265,4 @@ print(
 df.to_csv("scaleway_analysed.csv", index=False)
 
 print("\nIncident classification completed!")
+

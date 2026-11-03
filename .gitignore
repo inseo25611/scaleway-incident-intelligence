@@ -1,0 +1,6 @@
+scaleway_incidents.csv
+scaleway_analysed.csv
+__pycache__/
+*.pyc
+.env
+.venv/

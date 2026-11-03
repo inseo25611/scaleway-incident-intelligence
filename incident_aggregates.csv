@@ -1,0 +1,42 @@
+category_clean,impact,incident_type,status,incidents,with_resolution
+Block Storage,minor,Other / Review Needed,resolved,1,1
+BookMyName,critical,Unavailability,resolved,1,1
+BookMyName,minor,Other / Review Needed,resolved,1,1
+Cockpit,minor,Latency,resolved,1,1
+Cockpit,minor,Other / Review Needed,resolved,1,1
+Cockpit,none,Unavailability,resolved,1,1
+Container Registry,minor,HTTP 5xx Error,resolved,1,1
+DC3,minor,Unavailability,resolved,1,1
+DOMAIN-DNS,minor,Synchronization,resolved,1,1
+Dedibox,minor,Other / Review Needed,resolved,2,2
+Dedibox,minor,Unavailability,resolved,1,1
+Dedibox VPS,minor,Other / Review Needed,resolved,1,1
+Generative API,major,Other / Review Needed,resolved,1,1
+Generative API,minor,Other / Review Needed,resolved,2,2
+Generative API,minor,Timeout,monitoring,2,0
+Generative API,minor,Timeout,resolved,2,2
+Generative API,minor,Unavailability,resolved,2,2
+Generative API,none,Timeout,resolved,1,1
+IAM,minor,Other / Review Needed,resolved,1,1
+Instances,minor,Other / Review Needed,resolved,1,1
+Jobs,minor,Other / Review Needed,resolved,1,1
+Key Manager,minor,Unavailability,resolved,1,1
+Managed database,none,Other / Review Needed,resolved,1,1
+Network,minor,Other / Review Needed,resolved,1,1
+Region-labelled,major,Unavailability,resolved,1,1
+Region-labelled,minor,HTTP 5xx Error,resolved,1,1
+Region-labelled,minor,Latency,identified,1,0
+Region-labelled,minor,Other / Review Needed,identified,1,0
+Region-labelled,minor,Other / Review Needed,resolved,2,2
+Serverless Containers,minor,Other / Review Needed,resolved,1,1
+Serverless Functions,minor,Other / Review Needed,resolved,1,1
+Serverless-Database,minor,Other / Review Needed,resolved,1,1
+Support,minor,Support Delay,identified,2,0
+Support,minor,Support Delay,resolved,3,3
+TEM,minor,Other / Review Needed,resolved,1,1
+Unclassified,critical,Other / Review Needed,identified,1,0
+Unclassified,critical,Other / Review Needed,resolved,1,1
+Unclassified,minor,Other / Review Needed,monitoring,1,0
+Unclassified,minor,Other / Review Needed,resolved,1,1
+Unclassified,none,Unavailability,resolved,1,1
+WEBHOSTING,minor,Other / Review Needed,resolved,1,1
